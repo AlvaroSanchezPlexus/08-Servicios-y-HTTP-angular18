@@ -1,0 +1,15 @@
+<div class="auth-box">
+  @if (authService.isAuthenticated()) {
+    <div class="user-info">
+      <span
+        >Bienvenido, <b>{{ authService.user()?.name }}</b></span
+      >
+      <button (click)="authService.logout()">Cerrar Sesión</button>
+    </div>
+  } @else {
+    <div class="guest-info">
+      <span>No has iniciado sesión</span>
+      <button routerLink="/login">Ir al Login</button>
+    </div>
+  }
+</div>

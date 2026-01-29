@@ -1,0 +1,19 @@
+<div class="notify-container">
+  <h3>🔔 Notificaciones ({{ notifyService.pendientes() }})</h3>
+
+  <div class="list">
+    @for (n of notifyService.notificaciones(); track n.id) {
+      <div class="item" [class]="n.tipo" [class.leida]="n.leida">
+        <p>{{ n.mensaje }}</p>
+        <div class="actions">
+          @if (!n.leida) {
+            <button (click)="notifyService.marcarLeida(n.id)">Leída</button>
+          }
+          <button (click)="notifyService.eliminar(n.id)">Eliminar</button>
+        </div>
+      </div>
+    } @empty {
+      <p class="empty">No hay avisos nuevos.</p>
+    }
+  </div>
+</div>

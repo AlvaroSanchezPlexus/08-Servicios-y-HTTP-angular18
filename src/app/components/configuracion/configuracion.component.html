@@ -1,0 +1,30 @@
+<div class="config-card">
+  <h2>⚙️ Ajustes de Usuario</h2>
+
+  <div class="field">
+    <label>Idioma:</label>
+    <select
+      [ngModel]="configService.config().language"
+      (ngModelChange)="cambiarAjuste({ language: $event })"
+    >
+      <option value="es">Español</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Tamaño de fuente:</label>
+    <select
+      [ngModel]="configService.config().fontSize"
+      (ngModelChange)="cambiarAjuste({ fontSize: $event })"
+    >
+      <option value="small">Pequeño</option>
+      <option value="medium">Normal</option>
+      <option value="large">Grande</option>
+    </select>
+  </div>
+
+  <button class="reset" (click)="configService.reset()">
+    Restablecer por defecto
+  </button>
+</div>

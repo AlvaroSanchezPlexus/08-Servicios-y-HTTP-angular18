@@ -1,0 +1,86 @@
+// Variables rápidas
+$bg-color: #f0f2f5;
+$header-bg: #ffffff;
+$primary-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+.dashboard-layout {
+    min-height: 100vh;
+    background-color: $bg-color;
+    font-family: $primary-font;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    background: $header-bg;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #2c3e50;
+
+            span {
+                color: #3498db;
+                font-weight: 300;
+            }
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 350px; // Columna principal y lateral fija
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr; // En móviles, una debajo de otra
+    }
+}
+
+.primary-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.card-wrapper {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.secondary-column {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.main-footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    background: white;
+    border-top: 1px solid #e1e1e1;
+}

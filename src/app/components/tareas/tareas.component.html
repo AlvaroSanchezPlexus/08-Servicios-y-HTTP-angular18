@@ -1,0 +1,45 @@
+<div class="tareas-container">
+  <h2>📝 Gestor de Tareas Reactivo</h2>
+
+  <div class="stats-bar">
+    <span
+      >Total: <b>{{ tareasService.stats().total }}</b></span
+    >
+    <span
+      >Completadas: <b>{{ tareasService.stats().completas }}</b></span
+    >
+  </div>
+
+  <div class="add-form">
+    <input [(ngModel)]="nuevoTitulo" placeholder="Nueva tarea..." />
+    <select [(ngModel)]="nuevaCategoria">
+      <option value="trabajo">Trabajo</option>
+      <option value="personal">Personal</option>
+    </select>
+    <button (click)="agregar()">Añadir</button>
+  </div>
+
+  <div class="filters">
+    <button (click)="tareasService.filtroActual.set('todas')">Todas</button>
+    <button (click)="tareasService.filtroActual.set('trabajo')">Trabajo</button>
+    <button (click)="tareasService.filtroActual.set('personal')">
+      Personal
+    </button>
+  </div>
+
+  <div class="task-list">
+    @for (tarea of tareasService.tareasFiltradas(); track tarea.id) {
+      <div class="task-card" [class.done]="tarea.completada">
+        <input
+          type="checkbox"
+          [checked]="tarea.completada"
+          (change)="tareasService.toggleTarea(tarea.id)"
+        />
+        <span class="title">{{ tarea.titulo }}</span>
+        <span class="badge">{{ tarea.categoria }}</span>
+      </div>
+    } @empty {
+      <p>No hay tareas en esta categoría. ¡A descansar! 🌴</p>
+    }
+  </div>
+</div>
