@@ -1,4 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { NotificacionesService } from './notificaciones.service';
 export interface Tarea {
   id: number;
   titulo: string;
@@ -9,25 +10,29 @@ export interface Tarea {
   providedIn: 'root'
 })
 export class TareasService {
-  private _tareas = signal<Tarea[]>([]);
-  filtroActual = signal<'todas' | 'trabajo' | 'personal'>('todas');
+  private readonly _tareas = signal<Tarea[]>([]);
 
-  tareasFiltradas = computed(() => {
+  private readonly _notifications = inject(NotificacionesService);
+
+  public filtroActual = signal<'todas' | 'trabajo' | 'personal'>('todas');
+
+  public tareasFiltradas = computed(() => {
     const t = this._tareas();
     const f = this.filtroActual();
     return f === 'todas' ? t : t.filter(item => item.categoria === f);
   });
 
-  stats = computed(() => ({
+  public stats = computed(() => ({
     total: this._tareas().length,
     completas: this._tareas().filter(t => t.completada).length
   }));
 
-  agregarTarea(titulo: string, categoria: Tarea['categoria']) {
+  public agregarTarea(titulo: string, categoria: Tarea['categoria']) {
     this._tareas.update(val => [...val, { id: Date.now(), titulo, categoria, completada: false }]);
+    this._notifications.agregar(`Tarea "${titulo}" agregada.`, 'success');
   }
 
-  toggleTarea(id: number) {
+  public toggleTarea(id: number) {
     this._tareas.update(val => val.map(t => t.id === id ? { ...t, completada: !t.completada } : t));
   }
 }
