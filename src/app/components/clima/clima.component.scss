@@ -1,0 +1,109 @@
+// Variables
+$primary-color: #2c3e50;
+$secondary-color: #3498db;
+$accent-color: #e74c3c;
+$text-light: #ecf0f1;
+$text-dark: #2c3e50;
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$border-radius: 12px;
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin card-style {
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    color: $text-light;
+    padding: 20px;
+    transition: $transition;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+}
+
+// Contenedor principal
+.clima-container {
+    @include flex-center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #87ceeb, #e0f6ff);
+    padding: 20px;
+    gap: 20px;
+
+    .clima-card {
+        @include card-style;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .temperatura {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .descripcion {
+            font-size: 14px;
+            opacity: 0.9;
+            text-transform: capitalize;
+        }
+    }
+
+    .detalles {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        width: 100%;
+        max-width: 400px;
+
+        .detalle-item {
+            @include card-style;
+            @include flex-center;
+            flex-direction: column;
+            padding: 15px;
+            gap: 8px;
+
+            label {
+                font-size: 12px;
+                opacity: 0.8;
+                text-transform: uppercase;
+            }
+
+            span {
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .clima-container {
+        .clima-card {
+            max-width: 100%;
+
+            .temperatura {
+                font-size: 36px;
+            }
+        }
+
+        .detalles {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}

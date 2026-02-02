@@ -1,0 +1,11 @@
+<div class="news-list">
+  @for (item of newsService.noticias(); track item.url) {
+    <article class="news-item">
+      <h4>{{ item.title }}</h4>
+    </article>
+  }
+
+  <button (click)="cargarMas()" [disabled]="newsService.loading()">
+    {{ newsService.loading() ? "Cargando..." : "Ver más noticias" }}
+  </button>
+</div>

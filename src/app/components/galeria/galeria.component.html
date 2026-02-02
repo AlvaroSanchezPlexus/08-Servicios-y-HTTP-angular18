@@ -1,0 +1,19 @@
+<div class="upload-zone">
+  <label class="custom-upload">
+    Seleccionar archivo
+    <input type="file" (change)="onFileSelected($event)" hidden />
+  </label>
+
+  @if (fileService.progreso() > 0 && fileService.progreso() < 100) {
+    <div class="progress-container">
+      <div class="bar" [style.width.%]="fileService.progreso()"></div>
+      <span>Subiendo... {{ fileService.progreso() }}%</span>
+    </div>
+  }
+
+  <div class="gallery-grid">
+    @for (img of fileService.galeria(); track img) {
+      <div class="file-item">📁 {{ img }}</div>
+    }
+  </div>
+</div>

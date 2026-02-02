@@ -1,0 +1,20 @@
+<div class="translator">
+  <textarea
+    [(ngModel)]="textoATraducir"
+    placeholder="Escribe en español..."
+  ></textarea>
+  <button (click)="procesarTraduccion()">Traducir</button>
+
+  <div class="output">
+    <strong>Último resultado:</strong> {{ tradService.resultado() }}
+  </div>
+
+  <div class="history-section">
+    <h5>Historial reciente</h5>
+    <ul>
+      @for (h of tradService.historial(); track h) {
+        <li>{{ h }}</li>
+      }
+    </ul>
+  </div>
+</div>

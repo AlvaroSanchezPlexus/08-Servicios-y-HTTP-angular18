@@ -1,0 +1,120 @@
+// Variables
+$primary-color: #1a73e8;
+$secondary-color: #f1f3f4;
+$text-dark: #202124;
+$text-light: #5f6368;
+$border-color: #dadce0;
+$shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+$transition: all 0.3s ease;
+
+// Breakpoints
+$mobile: 576px;
+$tablet: 768px;
+$desktop: 1024px;
+
+.noticias {
+    padding: 2rem;
+    background-color: $secondary-color;
+    min-height: 100vh;
+
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &__title {
+        font-size: 2.5rem;
+        color: $text-dark;
+        margin-bottom: 2rem;
+        font-weight: 600;
+
+        @media (max-width: $tablet) {
+            font-size: 2rem;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    &__card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: $shadow;
+        transition: $transition;
+        cursor: pointer;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        &-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        &-content {
+            padding: 1.5rem;
+        }
+
+        &-category {
+            display: inline-block;
+            background-color: $primary-color;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        &-title {
+            font-size: 1.25rem;
+            color: $text-dark;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        &-description {
+            color: $text-light;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        &-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid $border-color;
+            font-size: 0.85rem;
+            color: $text-light;
+        }
+
+        &-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        &-link {
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: 600;
+            transition: $transition;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
