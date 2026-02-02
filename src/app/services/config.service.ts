@@ -10,22 +10,25 @@ export interface AppConfig {
 export class ConfigService {
   private default: AppConfig = { language: 'es', autoSave: true, fontSize: 'medium' };
 
-  config = signal<AppConfig>(this.default);
+  public config = signal<AppConfig>(this.default);
 
   constructor() {
     const saved = localStorage.getItem('app_settings');
     if (saved) this.config.set(JSON.parse(saved));
 
     effect(() => {
-      localStorage.setItem('app_settings', JSON.stringify(this.config()));
+      const config = this.config();
+      if (config) {
+        localStorage.setItem('app_settings', JSON.stringify(config));
+      }
     });
   }
 
-  updateConfig(newPart: Partial<AppConfig>) {
+  public updateConfig(newPart: Partial<AppConfig>) {
     this.config.update(old => ({ ...old, ...newPart }));
   }
 
-  reset() {
+  public reset() {
     this.config.set(this.default);
   }
 }

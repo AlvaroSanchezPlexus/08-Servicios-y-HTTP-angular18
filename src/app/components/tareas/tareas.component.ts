@@ -11,12 +11,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './tareas.component.scss'
 })
 export class TareasComponent {
-  tareasService = inject(TareasService);
+  public tareasService = inject(TareasService);
 
-  nuevoTitulo = '';
-  nuevaCategoria: 'trabajo' | 'personal' = 'trabajo';
+  public nuevoTitulo = '';
+  public nuevaCategoria: 'trabajo' | 'personal' = 'trabajo';
 
-  agregar() {
+  public agregar() {
     if (this.nuevoTitulo.trim()) {
       this.tareasService.agregarTarea(this.nuevoTitulo, this.nuevaCategoria);
       this.nuevoTitulo = ''; 
